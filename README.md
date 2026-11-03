@@ -1,2 +1,14 @@
-# Balkan-Bliz-Music
-**Balkan Music – Music That Connects Us!** 🎶❤️  Enjoy the best Balkan hits, traditional folk music, pop, and modern sounds from across the Balkans. Discover new artists, share your own music, and connect through the power of music.  **One Music, Many Hearts, One Balkan!** 🌍🎵
+# Balkan BLiZ Music — почетен прототип
+
+Ова е статичка демонстрација, не продукциска платформа. Отворете `index.html` во прелистувач или поставете го ZIP на Netlify Drop.
+
+## Следни фази
+1. Supabase Auth за регистрација и најава.
+2. Приватен Storage bucket за песни што чекаат одобрување; политики за големина и тип.
+3. Табели `profiles`, `tracks`, `moderation_actions`, `reports`, `likes` и `plays` со RLS.
+4. Админ панел со вистинска проверка на улоги и одобрување.
+5. Јавни страници за песни, плеер, пребарување и share метаподатоци.
+6. Правила за авторски права, пријавување и отстранување содржина.
+7. Опционална платена промоција во иднина; основните функции остануваат бесплатни.
+
+Ниту една датотека не се испраќа на сервер во овој прототип.
