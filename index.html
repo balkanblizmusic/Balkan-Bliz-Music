@@ -35,10 +35,14 @@ button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-deco
 .social-row button,.social-actions button{border:1px solid #865e9e;background:#29213e;color:#fff;padding:9px 12px;border-radius:10px}.social-row button:disabled{opacity:.5}
 .social-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.social-actions .liked{background:#b52c74}.comment-list{margin-top:12px;display:grid;gap:7px}.comment{background:#0d1023;padding:9px;border-radius:10px;overflow-wrap:anywhere}.comment small{color:#c5bbd8}.social-hint{color:#cfc7df;font-size:13px;margin-top:8px}.social-discussion{width:100%;margin-top:10px}.social-discussion input{width:100%;background:#101226;border:1px solid #5c5272;border-radius:10px;padding:10px;color:#fff}
 @media(max-width:560px){.social-panel{padding:14px}.social-row{flex-wrap:wrap}.social-row button{width:100%}}
+
+/* Private member profiles and direct messages */
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:13px;margin:17px 0}.member-card{border:1px solid #68537f;background:#211b35e8;padding:15px;border-radius:16px;text-align:center}.avatar{width:68px;height:68px;border-radius:50%;object-fit:cover;background:#543c76;display:grid;place-items:center;font-size:27px;margin:0 auto 9px}.member-card button,.private-layout button{border:1px solid #9869a9;background:#35264c;color:#fff;border-radius:10px;padding:9px 12px}.private-layout{display:grid;grid-template-columns:minmax(160px,1fr) 2fr;gap:14px}.private-conversations{max-height:360px;overflow:auto}.private-conversations button{display:block;width:100%;text-align:left;margin:5px 0}.private-messages{height:300px;overflow:auto;background:#090c1cbf;padding:12px;border-radius:12px}.private-bubble{padding:9px 12px;margin:8px 0;border:1px solid #635179;border-radius:12px;overflow-wrap:anywhere}.private-bubble.mine{background:#4a204c}.profile-settings{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.profile-settings input{background:#121326;color:white;border:1px solid #67517e;border-radius:10px;padding:10px;max-width:220px}.profile-settings label{display:grid;gap:5px}.private-status{color:#d2b8e8;font-size:13px}@media(max-width:600px){.private-layout{grid-template-columns:1fr}}
 </style></head>
-<body><div class="container"><header class="top"><a class="logo" href="#home">Balkan <span>BLiZ</span> Music ♫</a><nav class="topnav"><a href="#discover">Discover</a><a href="#community">Chat</a><a href="#about">About</a><button class="button ghost" id="accountBtn">Log in / Sign up</button><button class="pill" id="uploadTop">+ Submit song</button></nav></header>
+<body><div class="container"><header class="top"><a class="logo" href="#home">Balkan <span>BLiZ</span> Music ♫</a><nav class="topnav"><a href="#discover">Discover</a><a href="#members">Private chat</a><a href="#community">Community</a><a href="#about">About</a><button class="button ghost" id="accountBtn">Log in / Sign up</button><button class="pill" id="uploadTop">+ Submit song</button></nav></header>
 <main id="home"><section class="hero"><div><div class="eyebrow">THE SOUND OF THE BALKANS</div><h1>One music.<br><span class="gradient">Many hearts.</span></h1><p>Discover AI-created tracks and original songs from Balkan artists. Listen, share, and celebrate the music that connects us.</p><div class="actions"><a class="button" href="#discover">♫ Explore music</a><button class="button ghost" id="uploadHero">Upload your music</button></div></div><div class="record" aria-hidden="true"></div></section>
 <section id="discover"><div class="section-head"><div><h2>Discover music</h2><p class="muted">Community tracks approved for publication</p></div></div><div class="filters"><button class="filter active" data-filter="all">All songs</button><button class="filter" data-filter="AI Music">AI Music</button><button class="filter" data-filter="Original Music">Original Music</button></div><div class="songs" id="songs"></div></section>
+<section class="social-panel" id="members"><h2>👥 Members & private messages</h2><p class="muted">Every member has a profile. Only you and the recipient can read your private messages.</p><div id="profileEditor" hidden><div class="profile-settings"><label>Display name<input id="profileName" maxlength="40" placeholder="Your name"></label><label>Profile photo<input id="profilePhoto" type="file" accept="image/png,image/jpeg,image/webp"></label><button id="saveProfile" type="button">Save profile</button></div><p id="profileStatus" class="private-status"></p></div><div id="membersGrid" class="members-grid"></div><div id="privateArea" hidden><h3 id="privateHeading">Private messages</h3><div class="private-layout"><div class="private-conversations" id="privateConversations"></div><div><div class="private-messages" id="privateMessages"></div><form class="social-row" id="privateForm"><input id="privateInput" maxlength="1000" placeholder="Write a private message…"><button type="submit">Send</button></form><p class="private-status" id="privateStatus"></p></div></div></div></section>
 <section class="social-panel" id="community"><h2>💬 Balkan BLiZ Community Chat</h2><p class="muted">Chat with other music fans. Sign in to write messages.</p><div class="social-feed" id="socialFeed" aria-live="polite"></div><form class="social-row" id="chatForm"><input id="chatInput" maxlength="500" placeholder="Write a message to everyone…" aria-label="Chat message"><button type="submit" id="chatSend">Send</button></form><p class="social-hint" id="chatStatus"></p></section><section class="note" id="about"><strong>Made for the Balkan community.</strong><p>Listen for free and share music you own or are authorized to publish. Community submissions are reviewed by an administrator; administrator uploads publish immediately.</p><p id="sessionInfo" class="muted">Not signed in</p><button class="button ghost" id="adminBtn" hidden>Moderation panel</button> <button class="button ghost" id="myTracksBtn" hidden>My submissions</button><div class="admin" id="admin"><h3>Pending songs · Admin only</h3><div id="queue"></div></div><div class="admin" id="myTracks"><h3>My submissions</h3><div id="mine"></div></div></section></main></div><footer>© 2026 Balkan BLiZ Music · Music that connects us · Community-first</footer>
 <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal"><h2 id="authTitle">Log in / Sign up</h2><p class="muted">Sign in to submit your songs.</p><form id="authForm"><label class="field">Email<input id="email" type="email" required autocomplete="email"></label><label class="field">Password<input id="password" type="password" required minlength="6" autocomplete="current-password"></label><div id="authStatus" class="status" aria-live="polite"></div><div class="modal-actions"><button type="button" class="button ghost" id="authCancel">Close</button><button type="button" class="button ghost" id="signupBtn">Sign up</button><button class="button" type="submit">Log in</button></div></form><button class="button ghost" id="logoutBtn" hidden>Log out</button></div></div>
 <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><h2 id="modalTitle">Submit your music</h2><p class="muted">Your audio will be uploaded privately. Community tracks require approval.</p><form id="songForm"><label class="field">Song title<input id="title" maxlength="150" required></label><label class="field">Artist name<input id="artist" maxlength="150" required></label><label class="field">Music type<select id="type"><option value="original">Original Music</option><option value="ai">AI Music</option></select></label><label class="field">Audio file (MP3, WAV, OGG)<input id="audioFile" type="file" accept=".mp3,.wav,.ogg,audio/mpeg,audio/wav,audio/ogg" required><small>Maximum 50 MB.</small></label><label class="field"><span><input type="checkbox" id="rights" required style="width:auto"> I own this recording or have permission to share it.</span></label><div id="formStatus" class="status" aria-live="polite"></div><div class="modal-actions"><button type="button" class="button ghost" id="cancel">Cancel</button><button class="button" id="submitSongBtn" type="submit">Send music</button></div></form></div></div>
@@ -149,4 +153,55 @@ supabase.channel("balkan-music-social").on("postgres_changes",{event:"*",schema:
 socialLoadChat();
 setInterval(()=>{if(!document.hidden){socialLoadChat();socialLoadLikes()}},12000);
 
+
+// Private profiles & DMs. RLS in SETUP-PRIVATE-MESSAGES.sql enforces privacy.
+let memberProfiles=[], activePeer=null;
+const profileFallback=name=>`<div class="avatar">${esc((name||"?").slice(0,1).toUpperCase())}</div>`;
+const profileAvatar=p=>p.avatar_path?`<img class="avatar" alt="Profile photo" src="${supabase.storage.from('music-avatars').getPublicUrl(p.avatar_path).data.publicUrl}">`:profileFallback(p.display_name);
+async function loadMembers(){
+ const {data,error}=await supabase.from('music_profiles_public').select('user_id,display_name,avatar_path').order('display_name').limit(200);
+ if(error){$('membersGrid').textContent='Profiles unavailable: '+error.message;return}
+ memberProfiles=data||[];
+ $('membersGrid').innerHTML=memberProfiles.map(p=>`<div class="member-card">${profileAvatar(p)}<strong>${esc(p.display_name)}</strong><div style="margin-top:10px">${user&&p.user_id!==user.id?`<button data-peer="${p.user_id}">💬 Private chat</button>`:p.user_id===user?.id?'<small>Your profile</small>':''}</div></div>`).join('')||'<p class="muted">No member profiles yet.</p>';
+ if(user){const own=memberProfiles.find(p=>p.user_id===user.id);if(own&&!document.activeElement?.matches('#profileName'))$('profileName').value=own.display_name}
+}
+async function syncOwnProfile(){
+ $('profileEditor').hidden=!user;$('privateArea').hidden=!user;
+ if(!user){activePeer=null;await loadMembers();return}
+ const {data:existing}=await supabase.from('music_profiles_public').select('user_id').eq('user_id',user.id).maybeSingle();
+ if(!existing){await supabase.from('music_profiles_public').insert({user_id:user.id,display_name:(user.email||'Member').split('@')[0].slice(0,40)||'Member'})}
+ await loadMembers();await loadConversations();
+}
+$('saveProfile').onclick=async()=>{
+ if(!user)return openAuth();const name=$('profileName').value.trim(),file=$('profilePhoto').files[0];
+ if(!name||name.length>40){$('profileStatus').textContent='Enter a name (1–40 characters).';return}
+ const patch={display_name:name};
+ if(file){if(file.size>2*1024*1024||!['image/png','image/jpeg','image/webp'].includes(file.type)){$('profileStatus').textContent='Photo must be JPG, PNG or WebP, max 2 MB.';return}
+ const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';const path=`${user.id}/${crypto.randomUUID()}.${ext}`;
+ const {error}=await supabase.storage.from('music-avatars').upload(path,file,{contentType:file.type});if(error){$('profileStatus').textContent=error.message;return}patch.avatar_path=path}
+ const {error}=await supabase.from('music_profiles_public').update(patch).eq('user_id',user.id);
+ $('profileStatus').textContent=error?.message||'Profile saved.';if(!error)await loadMembers();
+};
+async function loadConversations(){
+ if(!user)return;
+ const {data,error}=await supabase.from('music_private_messages').select('sender_id,recipient_id,created_at').or(`sender_id.eq.${user.id},recipient_id.eq.${user.id}`).order('created_at',{ascending:false}).limit(300);
+ if(error){$('privateStatus').textContent=error.message;return}
+ const ids=[...new Set((data||[]).map(m=>m.sender_id===user.id?m.recipient_id:m.sender_id))];
+ $('privateConversations').innerHTML='<strong>My conversations</strong>'+ids.map(id=>{const p=memberProfiles.find(p=>p.user_id===id);return `<button data-peer="${id}">${esc(p?.display_name||'Member')}</button>`}).join('');
+}
+async function openPrivateChat(id){if(!user)return openAuth();if(id===user.id)return;activePeer=id;$('privateArea').hidden=false;const p=memberProfiles.find(p=>p.user_id===id);$('privateHeading').textContent='Private chat · '+(p?.display_name||'Member');await loadPrivateMessages();$('privateArea').scrollIntoView({behavior:'smooth',block:'nearest'});}
+async function loadPrivateMessages(){if(!user||!activePeer)return;
+ const {data,error}=await supabase.from('music_private_messages').select('id,sender_id,recipient_id,body,created_at').or(`and(sender_id.eq.${user.id},recipient_id.eq.${activePeer}),and(sender_id.eq.${activePeer},recipient_id.eq.${user.id})`).order('created_at',{ascending:true}).limit(150);
+ if(error){$('privateStatus').textContent=error.message;return}
+ $('privateStatus').textContent='Only you and the other member can see this conversation.';
+ $('privateMessages').innerHTML=(data||[]).map(m=>`<div class="private-bubble ${m.sender_id===user.id?'mine':''}"><small>${m.sender_id===user.id?'You':'Them'} · ${socialDate(m.created_at)}</small><div>${esc(m.body)}</div></div>`).join('')||'<p class="muted">No messages yet.</p>';
+ $('privateMessages').scrollTop=$('privateMessages').scrollHeight;
+}
+$('privateForm').onsubmit=async e=>{e.preventDefault();if(!user)return openAuth();if(!activePeer){$('privateStatus').textContent='Choose a member first.';return}
+ const body=$('privateInput').value.trim();if(!body)return;const {error}=await supabase.from('music_private_messages').insert({sender_id:user.id,recipient_id:activePeer,body});
+ if(error){$('privateStatus').textContent=error.message;return}$('privateInput').value='';await loadPrivateMessages();await loadConversations();};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-peer]');if(b)openPrivateChat(b.dataset.peer)});
+supabase.auth.onAuthStateChange(()=>setTimeout(syncOwnProfile,150));
+supabase.channel('balkan-private-messages').on('postgres_changes',{event:'INSERT',schema:'public',table:'music_private_messages'},()=>{if(user){loadConversations();if(activePeer)loadPrivateMessages()}}).subscribe();
+setTimeout(syncOwnProfile,500);
 </script></body></html>
