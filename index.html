@@ -26,11 +26,20 @@ button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-deco
 .admin{margin:18px 0;border:1px solid #5a4672;border-radius:16px;padding:18px;display:none}.admin.open{display:block}.request{padding:12px;border-top:1px solid #3b334a;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.request button{margin-left:8px}
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding:50px 0}.record{width:220px}.songs{grid-template-columns:1fr 1fr}.topnav{gap:9px}.topnav a{display:none}.hero h1{letter-spacing:-1.8px}}
 @media(max-width:560px){.songs{grid-template-columns:1fr}.hero{gap:25px}.section-head h2{font-size:25px}.player{flex-wrap:wrap}.player audio{width:100%;max-width:100%}.top .pill{padding:10px 14px}body{background-attachment:scroll}}
+
+/* Balkan BLiZ Music social features */
+.song{align-items:flex-start}.song>div:nth-child(2){min-width:0;flex:1}.social-panel{margin:28px 0 45px;padding:22px;border:1px solid #765b91;border-radius:20px;background:#111326ed;box-shadow:0 15px 55px #05051170}
+.social-panel h2{margin:0 0 8px}.social-feed{height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:12px;background:#090c1cbf;border-radius:14px;margin:16px 0}
+.social-msg{padding:10px 13px;border:1px solid #49405d;border-radius:13px;background:#232038;overflow-wrap:anywhere}.social-msg.mine{border-color:#d457a2;background:#412143}.social-msg small{color:#bdb8d0;display:block;margin-bottom:4px}
+.social-row{display:flex;gap:9px;align-items:center}.social-row input{flex:1;min-width:0;background:#101226;border:1px solid #5c5272;border-radius:12px;color:#fff;padding:12px}
+.social-row button,.social-actions button{border:1px solid #865e9e;background:#29213e;color:#fff;padding:9px 12px;border-radius:10px}.social-row button:disabled{opacity:.5}
+.social-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.social-actions .liked{background:#b52c74}.comment-list{margin-top:12px;display:grid;gap:7px}.comment{background:#0d1023;padding:9px;border-radius:10px;overflow-wrap:anywhere}.comment small{color:#c5bbd8}.social-hint{color:#cfc7df;font-size:13px;margin-top:8px}.social-discussion{width:100%;margin-top:10px}.social-discussion input{width:100%;background:#101226;border:1px solid #5c5272;border-radius:10px;padding:10px;color:#fff}
+@media(max-width:560px){.social-panel{padding:14px}.social-row{flex-wrap:wrap}.social-row button{width:100%}}
 </style></head>
-<body><div class="container"><header class="top"><a class="logo" href="#home">Balkan <span>BLiZ</span> Music ♫</a><nav class="topnav"><a href="#discover">Discover</a><a href="#about">About</a><button class="button ghost" id="accountBtn">Log in / Sign up</button><button class="pill" id="uploadTop">+ Submit song</button></nav></header>
+<body><div class="container"><header class="top"><a class="logo" href="#home">Balkan <span>BLiZ</span> Music ♫</a><nav class="topnav"><a href="#discover">Discover</a><a href="#community">Chat</a><a href="#about">About</a><button class="button ghost" id="accountBtn">Log in / Sign up</button><button class="pill" id="uploadTop">+ Submit song</button></nav></header>
 <main id="home"><section class="hero"><div><div class="eyebrow">THE SOUND OF THE BALKANS</div><h1>One music.<br><span class="gradient">Many hearts.</span></h1><p>Discover AI-created tracks and original songs from Balkan artists. Listen, share, and celebrate the music that connects us.</p><div class="actions"><a class="button" href="#discover">♫ Explore music</a><button class="button ghost" id="uploadHero">Upload your music</button></div></div><div class="record" aria-hidden="true"></div></section>
 <section id="discover"><div class="section-head"><div><h2>Discover music</h2><p class="muted">Community tracks approved for publication</p></div></div><div class="filters"><button class="filter active" data-filter="all">All songs</button><button class="filter" data-filter="AI Music">AI Music</button><button class="filter" data-filter="Original Music">Original Music</button></div><div class="songs" id="songs"></div></section>
-<section class="note" id="about"><strong>Made for the Balkan community.</strong><p>Listen for free and share music you own or are authorized to publish. Community submissions are reviewed by an administrator; administrator uploads publish immediately.</p><p id="sessionInfo" class="muted">Not signed in</p><button class="button ghost" id="adminBtn" hidden>Moderation panel</button> <button class="button ghost" id="myTracksBtn" hidden>My submissions</button><div class="admin" id="admin"><h3>Pending songs · Admin only</h3><div id="queue"></div></div><div class="admin" id="myTracks"><h3>My submissions</h3><div id="mine"></div></div></section></main></div><footer>© 2026 Balkan BLiZ Music · Music that connects us · Community-first</footer>
+<section class="social-panel" id="community"><h2>💬 Balkan BLiZ Community Chat</h2><p class="muted">Chat with other music fans. Sign in to write messages.</p><div class="social-feed" id="socialFeed" aria-live="polite"></div><form class="social-row" id="chatForm"><input id="chatInput" maxlength="500" placeholder="Write a message to everyone…" aria-label="Chat message"><button type="submit" id="chatSend">Send</button></form><p class="social-hint" id="chatStatus"></p></section><section class="note" id="about"><strong>Made for the Balkan community.</strong><p>Listen for free and share music you own or are authorized to publish. Community submissions are reviewed by an administrator; administrator uploads publish immediately.</p><p id="sessionInfo" class="muted">Not signed in</p><button class="button ghost" id="adminBtn" hidden>Moderation panel</button> <button class="button ghost" id="myTracksBtn" hidden>My submissions</button><div class="admin" id="admin"><h3>Pending songs · Admin only</h3><div id="queue"></div></div><div class="admin" id="myTracks"><h3>My submissions</h3><div id="mine"></div></div></section></main></div><footer>© 2026 Balkan BLiZ Music · Music that connects us · Community-first</footer>
 <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal"><h2 id="authTitle">Log in / Sign up</h2><p class="muted">Sign in to submit your songs.</p><form id="authForm"><label class="field">Email<input id="email" type="email" required autocomplete="email"></label><label class="field">Password<input id="password" type="password" required minlength="6" autocomplete="current-password"></label><div id="authStatus" class="status" aria-live="polite"></div><div class="modal-actions"><button type="button" class="button ghost" id="authCancel">Close</button><button type="button" class="button ghost" id="signupBtn">Sign up</button><button class="button" type="submit">Log in</button></div></form><button class="button ghost" id="logoutBtn" hidden>Log out</button></div></div>
 <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><h2 id="modalTitle">Submit your music</h2><p class="muted">Your audio will be uploaded privately. Community tracks require approval.</p><form id="songForm"><label class="field">Song title<input id="title" maxlength="150" required></label><label class="field">Artist name<input id="artist" maxlength="150" required></label><label class="field">Music type<select id="type"><option value="original">Original Music</option><option value="ai">AI Music</option></select></label><label class="field">Audio file (MP3, WAV, OGG)<input id="audioFile" type="file" accept=".mp3,.wav,.ogg,audio/mpeg,audio/wav,audio/ogg" required><small>Maximum 50 MB.</small></label><label class="field"><span><input type="checkbox" id="rights" required style="width:auto"> I own this recording or have permission to share it.</span></label><div id="formStatus" class="status" aria-live="polite"></div><div class="modal-actions"><button type="button" class="button ghost" id="cancel">Cancel</button><button class="button" id="submitSongBtn" type="submit">Send music</button></div></form></div></div>
 <div class="player" id="player"><div class="details"><strong id="playingTitle">Song</strong><div class="muted" id="playingArtist"></div></div><audio controls id="audioPlayer"></audio><button id="closePlayer" aria-label="Close player">✕</button></div>
@@ -59,7 +68,7 @@ $("adminBtn").onclick=()=>{$("admin").classList.toggle("open");if($("admin").cla
 $("myTracksBtn").onclick=()=>{$("myTracks").classList.toggle("open");if($("myTracks").classList.contains("open"))loadMine()};
 document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()});
 function typeLabel(t){return t==="ai"?"AI Music":"Original Music"}
-function render(){const visible=tracks.filter(t=>activeFilter==="all"||typeLabel(t.music_type)===activeFilter);$("songs").innerHTML=visible.length?visible.map(t=>`<article class="song"><div class="album">♫</div><div><h3>${esc(t.title)}</h3><p>${esc(t.artist)} · ${typeLabel(t.music_type)}</p><button class="play" data-play="${t.id}">▶ Play</button></div></article>`).join(""):'<div class="empty">♫ No published songs yet. Be the first to submit a track!</div>'}
+function render(){const visible=tracks.filter(t=>activeFilter==="all"||typeLabel(t.music_type)===activeFilter);$("songs").innerHTML=visible.length?visible.map(t=>`<article class="song"><div class="album">♫</div><div><h3>${esc(t.title)}</h3><p>${esc(t.artist)} · ${typeLabel(t.music_type)}</p><button class="play" data-play="${t.id}">▶ Play</button><div class="social-actions"><button data-like="${t.id}" aria-label="Like song">♡ Like <span data-count="${t.id}">0</span></button><button data-comments="${t.id}">💬 Comments</button><button data-share="${t.id}">↗ Share</button></div><div class="social-discussion" id="discussion-${t.id}" hidden><div class="comment-list" id="comments-${t.id}"></div><form class="social-row" data-comment-form="${t.id}"><input maxlength="500" placeholder="Write a comment…" aria-label="Comment"><button type="submit">Post</button></form></div></div></article>`).join(""):'<div class="empty">♫ No published songs yet. Be the first to submit a track!</div>'}
 async function loadTracks(){const {data,error}=await supabase.from("music_tracks").select("id,title,artist,music_type,audio_path").eq("status","approved").order("created_at",{ascending:false}).limit(100);if(error){$("songs").innerHTML=`<div class="empty">${esc(error.message)}</div>`;return}tracks=data||[];render()}
 async function loadQueue(){if(!isAdmin)return;const {data,error}=await supabase.from("music_tracks").select("id,title,artist,music_type,user_id").eq("status","pending").order("created_at",{ascending:true});$("queue").innerHTML=error?esc(error.message):data?.length?data.map(t=>`<div class="request"><div><b>${esc(t.title)}</b> — ${esc(t.artist)}<br><small class="muted">${typeLabel(t.music_type)}</small></div><div><button class="button ghost" data-preview="${t.id}">▶ Preview</button><button class="button" data-review="${t.id}" data-status="approved">Approve</button><button class="button ghost" data-review="${t.id}" data-status="rejected">Reject</button></div></div>`).join(""):'<p class="muted">No pending songs.</p>'}
 async function loadMine(){if(!user)return;const {data,error}=await supabase.from("music_tracks").select("title,artist,status,created_at").eq("user_id",user.id).order("created_at",{ascending:false});$("mine").innerHTML=error?esc(error.message):data?.length?data.map(t=>`<div class="request"><b>${esc(t.title)}</b><span>${esc(t.status)}</span></div>`).join(""):'<p class="muted">You have not submitted a song yet.</p>'}
@@ -74,4 +83,70 @@ if(b.dataset.review&&isAdmin){b.disabled=true;const {error}=await supabase.from(
 $("closePlayer").onclick=()=>{audio.pause();audio.removeAttribute("src");audio.load();hide("player");document.body.classList.remove("hasplayer")};
 supabase.auth.onAuthStateChange(()=>{setTimeout(refreshSession,0)});
 refreshSession();
+
+// Social additions: public chat, likes, comments and sharing.
+const socialEsc=esc;
+const socialName=()=>user?.email?.split("@")[0]?.slice(0,40)||"Member";
+const socialStatus=message=>{const el=$("chatStatus");if(el)el.textContent=message};
+const socialDate=s=>{try{return new Date(s).toLocaleString()}catch{return ""}};
+let socialChatBusy=false;
+async function socialLoadChat(){
+ const {data,error}=await supabase.from("music_chat_messages").select("id,user_id,display_name,body,created_at").order("created_at",{ascending:false}).limit(100);
+ if(error){socialStatus("Chat needs database setup: "+error.message);return}
+ const feed=$("socialFeed");const nearBottom=feed.scrollHeight-feed.scrollTop-feed.clientHeight<80;
+ feed.innerHTML=(data||[]).reverse().map(m=>`<div class="social-msg ${m.user_id===user?.id?"mine":""}"><small>${socialEsc(m.display_name)} · ${socialDate(m.created_at)} ${isAdmin||m.user_id===user?.id?`<button data-del-chat="${m.id}" title="Delete message">✕</button>`:""}</small>${socialEsc(m.body)}</div>`).join("")||'<p class="muted">No messages yet. Say hello!</p>';
+ if(nearBottom)feed.scrollTop=feed.scrollHeight;
+}
+$("chatForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!user){openAuth();return}if(socialChatBusy)return;
+ const input=$("chatInput"),body=input.value.trim();if(!body)return;
+ socialChatBusy=true;$("chatSend").disabled=true;
+ const {error}=await supabase.from("music_chat_messages").insert({user_id:user.id,display_name:socialName(),body});
+ if(error)socialStatus(error.message);else{input.value="";socialStatus("");await socialLoadChat()}
+ socialChatBusy=false;$("chatSend").disabled=false;
+});
+async function socialLoadLikes(){
+ if(!tracks.length)return;
+ const ids=tracks.map(t=>t.id);
+ const {data,error}=await supabase.from("music_song_likes").select("track_id,user_id").in("track_id",ids);
+ if(error)return;
+ for(const t of tracks){const rows=(data||[]).filter(l=>l.track_id===t.id);const count=document.querySelector(`[data-count="${t.id}"]`);if(count)count.textContent=rows.length;const btn=document.querySelector(`[data-like="${t.id}"]`);if(btn)btn.classList.toggle("liked",rows.some(l=>l.user_id===user?.id))}
+}
+async function socialLoadComments(trackId){
+ const {data,error}=await supabase.from("music_song_comments").select("id,user_id,display_name,body,created_at").eq("track_id",trackId).order("created_at",{ascending:true}).limit(100);
+ const el=$("comments-"+trackId);if(!el)return;
+ el.innerHTML=error?`<p>${socialEsc(error.message)}</p>`:(data||[]).map(c=>`<div class="comment"><small>${socialEsc(c.display_name)} · ${socialDate(c.created_at)} ${isAdmin||c.user_id===user?.id?`<button data-del-comment="${c.id}" data-track="${trackId}">✕</button>`:""}</small><div>${socialEsc(c.body)}</div></div>`).join("")||'<p class="muted">No comments yet.</p>';
+}
+// Load likes after each song list refresh, without changing the original loading logic.
+const socialOriginalRender=render;
+render=function(){socialOriginalRender();socialLoadLikes()};
+document.addEventListener("click",async e=>{
+ const btn=e.target.closest("button");if(!btn)return;
+ if(btn.dataset.like){
+  if(!user){openAuth();return}btn.disabled=true;
+  const id=btn.dataset.like;
+  const {data:mine}=await supabase.from("music_song_likes").select("track_id").eq("track_id",id).eq("user_id",user.id).maybeSingle();
+  const res=mine?await supabase.from("music_song_likes").delete().eq("track_id",id).eq("user_id",user.id):await supabase.from("music_song_likes").insert({track_id:id,user_id:user.id});
+  if(res.error)alert(res.error.message);await socialLoadLikes();btn.disabled=false;
+ }
+ if(btn.dataset.comments){const el=$("discussion-"+btn.dataset.comments);el.hidden=!el.hidden;if(!el.hidden)await socialLoadComments(btn.dataset.comments)}
+ if(btn.dataset.share){const t=tracks.find(x=>x.id===btn.dataset.share);const link=new URL(location.href);link.hash="discover";
+  if(navigator.share){try{await navigator.share({title:`${t?.title||"Music"} — Balkan BLiZ Music`,url:link.href})}catch{}}
+  else{try{await navigator.clipboard.writeText(link.href);alert("Page link copied! Share it on Facebook or WhatsApp.")}catch{prompt("Copy this link:",link.href)}}
+ }
+ if(btn.dataset.delChat){if(!confirm("Delete this message?"))return;const {error}=await supabase.from("music_chat_messages").delete().eq("id",btn.dataset.delChat);if(error)alert(error.message);await socialLoadChat()}
+ if(btn.dataset.delComment){if(!confirm("Delete this comment?"))return;const {error}=await supabase.from("music_song_comments").delete().eq("id",btn.dataset.delComment);if(error)alert(error.message);await socialLoadComments(btn.dataset.track)}
+});
+document.addEventListener("submit",async e=>{
+ const form=e.target.closest("[data-comment-form]");if(!form)return;e.preventDefault();if(!user){openAuth();return}
+ const input=form.querySelector("input"),body=input.value.trim();if(!body)return;
+ const btn=form.querySelector("button");btn.disabled=true;
+ const {error}=await supabase.from("music_song_comments").insert({track_id:form.dataset.commentForm,user_id:user.id,display_name:socialName(),body});
+ if(error)alert(error.message);else{input.value="";await socialLoadComments(form.dataset.commentForm)}btn.disabled=false;
+});
+// Realtime subscriptions with periodic refresh as a fallback.
+supabase.channel("balkan-music-social").on("postgres_changes",{event:"*",schema:"public",table:"music_chat_messages"},()=>socialLoadChat()).subscribe();
+socialLoadChat();
+setInterval(()=>{if(!document.hidden){socialLoadChat();socialLoadLikes()}},12000);
+
 </script></body></html>
